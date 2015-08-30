@@ -7,8 +7,10 @@
             string[,] TicTacToeBoard = new string[3, 3];
 
             GameEngine gameEngine = new GameEngine();
+            GameVisualizer gameVisualizer = new GameVisualizer();
+            GameManager gameManager = new GameManager(gameVisualizer, gameEngine);
 
-            gameEngine.StartGame(TicTacToeBoard);
+            gameManager.StartGame(TicTacToeBoard);
         }
     }
 }

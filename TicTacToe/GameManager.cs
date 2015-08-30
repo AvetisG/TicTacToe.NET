@@ -25,7 +25,7 @@ namespace TicTacToe
             PlayGame(TicTacToeBoard, player1, player2);
         }
 
-        public void ChoosePlayer(ref string player1, ref string player2)
+        private void ChoosePlayer(ref string player1, ref string player2)
         {
             Console.WriteLine("Player1, Do you want to be X or O?");
             while (true)

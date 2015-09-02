@@ -6,6 +6,8 @@ namespace TicTacToe
     {
         private readonly GameVisualizer _gameVisualizer;
         private readonly GameEngine _gameEngine;
+        private IPlayer player1;
+        private IPlayer player2;
 
         public GameManager(GameVisualizer argGameVisualizer, GameEngine argGameEngine)
         {
@@ -15,47 +17,66 @@ namespace TicTacToe
 
         public void StartGame(string[,] TicTacToeBoard)
         {
-            var player1 = string.Empty;
-            var player2 = string.Empty;
-
             _gameVisualizer.InitializeBoard(TicTacToeBoard);
 
-            ChoosePlayer(ref player1, ref player2);
+            ChooseMode();
 
-            PlayGame(TicTacToeBoard, player1, player2);
+            ChoosePlayer();
+
+            PlayGame(TicTacToeBoard);
         }
 
-        private void ChoosePlayer(ref string player1, ref string player2)
+        private void ChooseMode()
+        {
+            while(true)
+            {
+                Console.WriteLine("Choose playing mode - 2PLAYER or AI?");
+                var mode = Console.ReadLine();
+                if (mode.ToUpper().Equals("2PLAYER"))
+                {
+                    player1 = new RealPlayer();
+                    player2 = new RealPlayer();
+                    break;
+                }
+                else if (mode.ToUpper().Equals("AI"))
+                {
+                    player1 = new RealPlayer();
+                    player2 = new AIPlayer();
+                    break;
+                }
+            }
+        }
+
+        private void ChoosePlayer()
         {
             Console.WriteLine("Player1, Do you want to be X or O?");
             while (true)
             {
-                player1 = Console.ReadLine().ToUpper();
+                var player1Name = Console.ReadLine().ToUpper();
 
-                if (player1.ToUpper().Equals("X") || player1.ToUpper().Equals("O")) break;
+                if (player1Name.ToUpper().Equals("X") || player1Name.ToUpper().Equals("O"))
+                {
+                    player1.SetPlayer(player1Name);
+                    break;
+                }
             }
 
-            player2 = player1.ToUpper().Equals("X") ? "O" : "X";
+            player2.SetPlayer(player1.GetPlayer().ToUpper().Equals("X") ? "O" : "X");
         }
 
-        private void PlayGame(string[,] ticTacToeBoard, string player1, string player2)
+        private void PlayGame(string[,] ticTacToeBoard)
         {
             var Winner = string.Empty;
             var currentPlayer = player1;
 
             while (Winner.Equals(string.Empty))
             {
-                Console.WriteLine("Enter position X for {0}", currentPlayer);
-                int positionX = Int32.Parse(Console.ReadLine());
-
-                Console.WriteLine("Enter position Y for {0}", currentPlayer);
-                int positionY = Int32.Parse(Console.ReadLine());
-
-                if (ticTacToeBoard[positionX, positionY].Equals(" ")) ticTacToeBoard[positionX, positionY] = currentPlayer;
+                player1.Play(ticTacToeBoard);
+                player2.Play(ticTacToeBoard);
 
                 _gameVisualizer.PrintTicTacToeBoard(ticTacToeBoard);
 
-                Winner = _gameEngine.CheckForVictory(ticTacToeBoard, currentPlayer);
+                Winner = _gameEngine.CheckForVictory(ticTacToeBoard, currentPlayer.GetPlayer());
 
                 currentPlayer = currentPlayer.Equals(player1) ? player2 : player1;
             }

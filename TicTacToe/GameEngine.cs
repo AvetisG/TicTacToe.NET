@@ -45,7 +45,7 @@
                 DiagonalVictory = 0;
                 for (int i = 0; i < ticTacToeBoard.GetLength(0); i++)
                 {
-                    if (ticTacToeBoard[(ticTacToeBoard.GetLength(0) - 1) - i, (ticTacToeBoard.GetLength(0) - 1) - i].Equals(currentPlayer))
+                    if (ticTacToeBoard[i, (ticTacToeBoard.GetLength(0) - 1) - i].Equals(currentPlayer))
                         DiagonalVictory++;
                 }
             }

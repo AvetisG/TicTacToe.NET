@@ -4,6 +4,7 @@ namespace TicTacToe
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             string[,] TicTacToeBoard = new string[3, 3];
@@ -14,25 +15,28 @@ namespace TicTacToe
             GameVisualizer gameVisualizer = new GameVisualizer();
             GameManager gameManager = new GameManager(gameVisualizer, gameEngine);
 
-            while (true)
-            {
-                Console.WriteLine("Choose playing mode - 2PLAYER or AI?");
-                var mode = Console.ReadLine();
-                if (mode.ToUpper().Equals("2PLAYER"))
-                {
-                    player1 = new RealPlayer();
-                    player2 = new RealPlayer();
-                    break;
-                }
-                else if (mode.ToUpper().Equals("AI"))
-                {
-                    player1 = new RealPlayer();
-                    player2 = new AIPlayer();
-                    break;
-                }
-            }
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.ShowDialog();
 
-            gameManager.PlayGame(TicTacToeBoard, player1, player2);
+            //while (true)
+            //{
+            //    Console.WriteLine("Choose playing mode - 2PLAYER or AI?");
+            //    var mode = Console.ReadLine();
+            //    if (mode.ToUpper().Equals("2PLAYER"))
+            //    {
+            //        player1 = new RealPlayer();
+            //        player2 = new RealPlayer();
+            //        break;
+            //    }
+            //    else if (mode.ToUpper().Equals("AI"))
+            //    {
+            //        player1 = new RealPlayer();
+            //        player2 = new AIPlayer();
+            //        break;
+            //    }
+            //}
+
+            //gameManager.PlayGame(TicTacToeBoard, player1, player2);
         }
     }
 }

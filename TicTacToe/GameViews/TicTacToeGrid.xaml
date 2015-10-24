@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="TicTacToe.GameViews.TicTacToeGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TicTacToe.GameViews"
+             xmlns:attached="clr-namespace:TicTacToe"
+             xmlns:converters="clr-namespace:TicTacToe.Converters"
+             mc:Ignorable="d"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             d:DesignHeight="300" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <converters:CoordinateConverter x:Key="CoordinateConverter" />
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <converters:EmptyCellEnumConverter x:Key="EmptyCellEnumConverter" />
+
+        <Style TargetType="TextBlock" x:Key="TicTacToeCellStyle">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="100" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Text }" Value="None">
+                    <Setter Property="Text" Value="" />
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid ShowGridLines="True">
+
+        <DataGrid
+            AutoGenerateColumns="False"
+            HeadersVisibility="None"
+            ColumnWidth="*"
+            RowHeight="170"
+            SelectionMode="Single"
+            SelectionUnit="Cell"
+            IsEnabled="{Binding Path=PlayerWon, Mode=TwoWay, Converter={StaticResource InverseBooleanConverter}}"
+            IsReadOnly="True"
+            ItemsSource="{Binding TicTacToeBoard, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=[0], Mode=TwoWay, Converter={StaticResource EmptyCellEnumConverter}}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource TicTacToeCellStyle}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=[1], Mode=TwoWay, Converter={StaticResource EmptyCellEnumConverter}}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource TicTacToeCellStyle}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=[2], Mode=TwoWay, Converter={StaticResource EmptyCellEnumConverter}}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource TicTacToeCellStyle}" />
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedCellsChanged">
+                    <i:InvokeCommandAction Command="{Binding MakeMoveCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CoordinateConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding Path="CurrentCell" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGrid}" />
+                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGrid}" />
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </i:InvokeCommandAction.CommandParameter>
+                    </i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

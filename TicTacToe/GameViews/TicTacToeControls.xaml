@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="TicTacToe.GameViews.TicTacToeControls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TicTacToe.GameViews"
+             xmlns:viewModels="clr-namespace:TicTacToe.GameViewModels"
+             xmlns:converters="clr-namespace:TicTacToe.Converters"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <converters:InverseBooleanConverter x:Key="inverseBooleanConverter" />
+    </UserControl.Resources>
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+
+            <ComboBox
+                    Name="GameMode"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"    
+                    FontSize="20"
+                    SelectedItem="{Binding GameMode, Mode=TwoWay}"
+                    ItemsSource="{Binding GameModeSource}">
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <ComboBox
+                    Name="GamePlayer"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontSize="20"    
+                    SelectedItem="{Binding Player, Mode=TwoWay}"
+                    ItemsSource="{Binding PlayerSource}">
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Button FontSize="20" Command="{Binding StartGameCommand}" IsEnabled="{Binding Path=GameStarted, Converter={StaticResource inverseBooleanConverter}}">Play Game</Button>
+        </Grid>
+
+    </Grid>
+</UserControl>

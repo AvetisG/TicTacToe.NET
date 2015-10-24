@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TicTacToe.GameViewModels;
 
 namespace TicTacToe
 {
@@ -7,8 +8,9 @@ namespace TicTacToe
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow()
+        public GameWindow(GameWindowViewModel GameWindowViewModel)
         {
+            DataContext = GameWindowViewModel;
             InitializeComponent();
         }
     }

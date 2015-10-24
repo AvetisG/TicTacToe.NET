@@ -1,0 +1,28 @@
+﻿<Window x:Class="TicTacToe.GameWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TicTacToe"
+             xmlns:controls="clr-namespace:TicTacToe.GameViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    
+    <Grid ShowGridLines="True">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <controls:TicTacToeGrid DataContext="{Binding Path=TicTacToeGridViewModel}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <controls:TicTacToeControls DataContext="{Binding Path=TicTacToeControlsViewModel}"/>
+        </Grid>
+
+    </Grid>
+   
+</Window>

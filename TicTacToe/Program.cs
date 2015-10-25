@@ -15,7 +15,7 @@ namespace TicTacToe
             ScenarioFactory scenarioFactory = new ScenarioFactory(playerFactory);
 
             TicTacToeControlsViewModel TicTacToeControlsViewModel = new TicTacToeControlsViewModel(new TicTacToeControlsModel(), scenarioFactory);
-            TicTacToeGridViewModel TicTacToeGridViewModel = new TicTacToeGridViewModel(new TicTacToeGridModel(), TicTacToeControlsViewModel, new VictoryValidator());
+            TicTacToeGridViewModel TicTacToeGridViewModel = new TicTacToeGridViewModel(new TicTacToeGridModel(), TicTacToeControlsViewModel);
             GameWindowViewModel GameWindowViewModel = new GameWindowViewModel(TicTacToeControlsViewModel, TicTacToeGridViewModel);
 
             GameWindow gameWindow = new GameWindow(GameWindowViewModel);

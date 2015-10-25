@@ -16,7 +16,7 @@ namespace TicTacToe.GameViewModels
 
         public ICommand MakeMoveCommand { get; set; }
 
-        internal TicTacToeGridViewModel(TicTacToeGridModel ticTacToeGridModel, TicTacToeControlsViewModel ticTacToeControlsViewModel, VictoryValidator victoryValidator)
+        internal TicTacToeGridViewModel(TicTacToeGridModel ticTacToeGridModel, TicTacToeControlsViewModel ticTacToeControlsViewModel)
         {
             _playerWon = false;
             _ticTacToeControlsViewModel = ticTacToeControlsViewModel;

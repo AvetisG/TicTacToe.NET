@@ -18,12 +18,6 @@
         <Style TargetType="TextBlock" x:Key="TicTacToeCellStyle">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="100" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Text }" Value="None">
-                    <Setter Property="Text" Value="" />
-                </DataTrigger>
-            </Style.Triggers>
-
         </Style>
     </UserControl.Resources>
     

@@ -40,7 +40,7 @@ namespace TicTacToe.GameViewModels
             get { return _ticTacToeBoard; }
             set {
                 _ticTacToeBoard = value;
-                RaisePropertyChanged("TicTacToeBoard");
+                RaisePropertyChanged(() => TicTacToeBoard);
             }
         }
 
@@ -50,7 +50,7 @@ namespace TicTacToe.GameViewModels
             set
             {
                 _playerWon = value;
-                RaisePropertyChanged("PlayerWon");
+                RaisePropertyChanged(() => PlayerWon);
             }
         }
 

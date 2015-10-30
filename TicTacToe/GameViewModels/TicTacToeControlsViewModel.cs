@@ -48,7 +48,7 @@ namespace TicTacToe.GameViewModels
             get { return _gameStarted; }
             set {
                 _gameStarted = value;
-                RaisePropertyChanged("GameStarted");
+                RaisePropertyChanged(() => GameStarted);
             }
         }
 
